@@ -1,8 +1,8 @@
 from django.contrib import admin
-from simple_history.admin import SimpleHistoryAdmin
 from .models import Meeting
-
-# admin.site.register(Meeting, SimpleHistoryAdmin)
+from django.utils.html import format_html
+from django.urls import reverse
+from .helper import get_last_transcription_text
 
 
 @admin.register(Meeting)
@@ -12,11 +12,32 @@ class AccountAdmin(admin.ModelAdmin):
         "coach",
         "student",
         "created_time",
+        "is_content",
+        "fetch",
     )
+    list_per_page = 20
 
-    def save_model(self, request, obj, form, change):
-        obj.user = request.user
-        super().save_model(request, obj, form, change)
+    def is_content(self, obj):
+        return obj.content != ""
 
-        if "audio_file" in form.changed_data and obj.audio_file:
-            obj.fetch_content()
+    is_content.boolean = True
+    is_content.short_description = "업데이트 여부"
+
+    def fetch(self, obj):
+        path = reverse("admin:meeting_meeting_change", args=[obj.pk]) + "?fetch=True"
+        return format_html(f'<a class="button" href="{path}">받아오기</a>')
+
+    fetch.short_description = "새로 가져오기"
+
+    def change_view(self, request, object_id, form_url="", extra_context=None):
+        is_fetch_triggered = request.GET.get("fetch", False)
+        if object_id is not None and is_fetch_triggered:
+            print("Getting last transcription text...")
+            obj = Meeting.objects.get(pk=object_id)
+            transcription_text = get_last_transcription_text()
+            obj.content = transcription_text
+            obj.save()
+
+        return super().change_view(
+            request, object_id, form_url=form_url, extra_context=extra_context
+        )
