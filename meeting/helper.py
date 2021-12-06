@@ -26,6 +26,7 @@ def get_transcription_clova_api(audio_data=None, audio_path=None):
     response = requests.post(url, data=data, headers=headers)
     print(f"response from CLOVA: {response}, OK? {response.ok}")
     if response.ok:
+        print("Fetching transribed text Done.")
         return response.json()["text"]
     else:
         return response.text
@@ -72,6 +73,6 @@ def get_last_recording_from_zoom(meeting_id=None):
         print(f"download_url: {download_url}")
 
         audio_response = requests.get(download_url)
-        print("Done.")
+        print("Downloading Audio File Done.")
         audio_data = audio_response.content
         return audio_data
