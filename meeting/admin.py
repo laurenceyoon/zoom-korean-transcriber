@@ -16,7 +16,7 @@ class AccountAdmin(admin.ModelAdmin):
         "is_content",
         "fetch",
     )
-    list_per_page = 20
+    list_per_page = 10
 
     def is_content(self, obj):
         return obj.content != ""
