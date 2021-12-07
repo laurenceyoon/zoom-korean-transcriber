@@ -22,3 +22,7 @@ urlpatterns = [
     path("jet/", include("jet.urls")),
     path("admin/", admin.site.urls),
 ]
+
+admin.site.site_title = "Administration"
+admin.site.site_header = "오늘의 사수 관리자 페이지"
+admin.site.index_title = "오늘의 사수"
