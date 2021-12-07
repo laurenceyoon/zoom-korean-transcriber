@@ -31,6 +31,7 @@ For the credentials of [Naver Cloud Platform](https://www.ncloud.com/) and [Zoom
 
 To add a new admin account, execute below and enter the account information:
 ```bash
+$ python manage.py migrate
 $ python manage.py createsuperuser
 ```
 
