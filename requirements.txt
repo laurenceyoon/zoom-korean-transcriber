@@ -2,3 +2,4 @@ Django==3.2.9
 django-simple-history==3.0.0
 python-dotenv==0.19.2
 requests==2.26.0
+django-jet-reboot==1.1.1
