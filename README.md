@@ -1,4 +1,4 @@
-# django-with-clova-csr
+# Zoom Korean Transcriber
 
 A simple django application for audio transcription via Clova Speech Recognition API.
 
