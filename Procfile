@@ -1,1 +1,1 @@
-web: gunicorn zoom-korean-transcriber.wsgi --log-file -
+web: gunicorn app.wsgi
