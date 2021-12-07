@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Meeting
 from django.utils.html import format_html
 from django.urls import reverse
+
 from .helper import get_last_transcription_text
+from .models import Meeting
 
 
 @admin.register(Meeting)
@@ -32,9 +33,8 @@ class AccountAdmin(admin.ModelAdmin):
     def change_view(self, request, object_id, form_url="", extra_context=None):
         is_fetch_triggered = request.GET.get("fetch", False)
         if object_id is not None and is_fetch_triggered:
-            print("Getting last transcription text...")
             obj = Meeting.objects.get(pk=object_id)
-            transcription_text = get_last_transcription_text()
+            transcription_text = get_last_transcription_text(meeting_id=obj.meeting_id)
             obj.content = transcription_text
             obj.save()
 

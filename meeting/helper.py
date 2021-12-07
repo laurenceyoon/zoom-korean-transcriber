@@ -47,15 +47,16 @@ def get_transcription_kakao_api(audio_path):
     return response.text
 
 
-def get_last_transcription_text():
-    audio_data = get_last_recording_from_zoom()
+def get_last_transcription_text(meeting_id):
+    if not meeting_id:
+        meeting_id = ZOOM_MEETING_ID
+    print(f"Getting last transcription text for Meeting ID({meeting_id})...")
+    audio_data = get_last_recording_from_zoom(meeting_id)
     transcription_text = get_transcription_clova_api(audio_data=audio_data)
     return transcription_text
 
 
-def get_last_recording_from_zoom(meeting_id=None):
-    if meeting_id is None:
-        meeting_id = ZOOM_MEETING_ID
+def get_last_recording_from_zoom(meeting_id):
     url = f"https://api.zoom.us/v2/meetings/{meeting_id}/recordings"
 
     payload = {}
