@@ -151,4 +151,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# User settings
+CLOVA_CLIENT_ID = os.getenv("CLOVA_CLIENT_ID")
+CLOVA_CLIENT_SECRET = os.getenv("CLOVA_CLIENT_SECRET")
+KAKAO_REST_API_KEY = os.getenv("KAKAO_REST_API_KEY")
+ZOOM_JWT_TOKEN = os.getenv("ZOOM_JWT_TOKEN")
+ZOOM_MEETING_ID = os.getenv("ZOOM_MEETING_ID")
+SERVICE_NAME = os.getenv("SERVICE_NAME")
+
 django_heroku.settings(locals())

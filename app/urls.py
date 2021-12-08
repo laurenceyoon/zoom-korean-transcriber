@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
@@ -23,6 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 ]
 
-admin.site.site_title = "Administration"
-admin.site.site_header = "오늘의 사수 관리자 페이지"
-admin.site.index_title = "오늘의 사수"
+if service_name := settings.SERVICE_NAME:
+    admin.site.site_title = "관리자"
+    admin.site.site_header = f"{service_name} 관리자 페이지"
+    admin.site.index_title = service_name
