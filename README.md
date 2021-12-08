@@ -4,6 +4,8 @@ A simple django application for audio transcription from recorded Zoom Meeting, 
 
 This app only provides admin site for managing Korean transcription from recorded Zoom Meeting.
 
+Visit here for DEMO: https://zoom-korean-transcriber.herokuapp.com/
+
 - Version information:
     - python >= 3.8.x
     - PostgreSQL 14.1
@@ -25,6 +27,7 @@ DJANGO_SECRET_KEY
 CLOVA_CLIENT_ID
 CLOVA_CLIENT_SECRET
 ZOOM_JWT_TOKEN
+SERVICE_NAME   # Name for your Application
 ```
 
 For the credentials of [Naver Cloud Platform](https://www.ncloud.com/) and [Zoom](https://developers.zoom.us/), please refer to the each link.
